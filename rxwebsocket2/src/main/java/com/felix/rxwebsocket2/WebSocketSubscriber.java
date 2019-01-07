@@ -23,7 +23,7 @@ public class WebSocketSubscriber implements Observer<WebSocketInfo> {
     }
 
     @Override
-    public final void onSubscribe(Disposable disposable) {
+    public void onSubscribe(Disposable disposable) {
     }
 
     @Override

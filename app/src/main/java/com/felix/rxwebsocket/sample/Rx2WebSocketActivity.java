@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import okhttp3.WebSocket;
 import okio.ByteString;
 
 public class Rx2WebSocketActivity extends BaseRxWebSocketActivity {
+
+    Disposable mDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,12 @@ public class Rx2WebSocketActivity extends BaseRxWebSocketActivity {
         RxWebSocket.get(Constant.WEB_SOCKET_URL)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new WebSocketSubscriber() {
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        super.onSubscribe(disposable);
+                        mDisposable = disposable;
+                    }
+
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
@@ -57,6 +66,14 @@ public class Rx2WebSocketActivity extends BaseRxWebSocketActivity {
                         super.onClose();
                     }
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 
     @Override
