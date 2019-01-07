@@ -2,7 +2,7 @@
 
 Create WebSocket with RxJava(2) and OKHttp3
 
-##Adding to project
+## Adding to project
 ```Groovy
 //if you use rxjava
 implementation "com.felix:rx-websocket:0.0.1"
@@ -13,7 +13,7 @@ implementation "com.felix:rx2-websocket:0.0.1"
 ```
 Notice: RxWebSocket depend on [okhttp](https://github.com/square/okhttp) and [RxJava](https://github.com/ReactiveX/RxJava)
 
-##Usage
+## Usage
 ```Java
 //init before send message and listen receive message
 RxWebSocket.initialize(Constant.WEB_SOCKET_URL,    //websocket url
