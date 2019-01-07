@@ -64,6 +64,7 @@ public class Rx2WebSocketActivity extends BaseRxWebSocketActivity {
                     @Override
                     protected void onClose() {
                         super.onClose();
+                        mBtSend.setEnabled(false);
                     }
                 });
     }
